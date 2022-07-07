@@ -1,0 +1,69 @@
+import { useState } from "react";
+
+import { postCreateRoutineRequest } from "../api";
+import Modal from "./Modal";
+
+const CreateRoutine = ({ token, userData, setUseModal }) => {
+  const [routineName, setRoutineName] = useState("");
+  const [routineGoal, setRoutineGoal] = useState("");
+  const [makePublic, setMakePublic] = useState(false);
+  const nameChangeHandler = (e) => {
+    setRoutineName(e.target.value);
+  };
+  const goalChangeHandler = (e) => {
+    setRoutineGoal(e.target.value);
+  };
+  const publicChangeHandler = e => {
+    setMakePublic(e.target.checked);
+  }
+  const submitHandler = async(e) => {
+    e.preventDefault();
+    const name = routineName;
+    const goal = routineGoal;
+    const isPublic = makePublic;
+    const routineData = {
+      token,
+      name,
+      goal,
+      isPublic,
+    }
+    const result = await postCreateRoutineRequest(routineData);
+    console.log("Result after attempting to create a new routine: ", result);
+    setUseModal(false);
+  }
+  const clickHandler = (e) => {
+    e.preventDefault();
+    setUseModal(false);
+  };
+  return (
+    <Modal setUseModal={setUseModal}>
+      <header>
+        <h3>Create a Routine</h3>
+      </header>
+      <form onSubmit={submitHandler}>
+        <label htmlFor="name">Name:</label>
+        <input
+          id="name"
+          type="text"
+          placeholder="Enter name of routine"
+          onChange={nameChangeHandler}
+          required
+        />
+        <label htmlFor="goal">Goal:</label>
+        <input
+          id="goal"
+          type="text"
+          placeholder="Enter goal of routine"
+          onChange={goalChangeHandler}
+          required
+        />
+        <label htmlFor="public">Make routine public?</label>
+        <input id="public" type="checkbox" onChange={publicChangeHandler} />
+        <button type="submit">Submit</button>
+        <button onClick={clickHandler}>Cancel</button>
+      </form>
+    </Modal>
+  );
+};
+
+export default CreateRoutine;

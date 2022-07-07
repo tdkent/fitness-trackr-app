@@ -10,8 +10,10 @@ import Nav from "./components/Nav";
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [userData, setUserData] = useState({});
   const [routinesData, setRoutinesData] = useState([]);
   const [activitiesData, setActivitiesData] = useState([]);
+  const [useModal, setUseModal] = useState(false);
 
   return (
     <Routes>
@@ -26,17 +28,40 @@ function App() {
             />
           }
         />
-        <Route path="/my-routines" element={<MyRoutines />} />
+        <Route
+          path="/my-routines"
+          element={
+            <MyRoutines
+              token={token}
+              userData={userData}
+              useModal={useModal}
+              setUseModal={setUseModal}
+            />
+          }
+        />
         <Route
           path="/activities"
           element={
             <Activities
+              token={token}
               activitiesData={activitiesData}
               setActivitiesData={setActivitiesData}
+              useModal={useModal}
+              setUseModal={setUseModal}
             />
           }
         />
-        <Route path="/auth" element={<Auth setToken={setToken} />} />
+        <Route
+          path="/auth"
+          element={
+            <Auth
+              setToken={setToken}
+              setUserData={setUserData}
+              useModal={useModal}
+              setUseModal={setUseModal}
+            />
+          }
+        />
         <Route path="*" element={<Unknown />} />
       </Route>
     </Routes>
