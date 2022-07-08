@@ -8,7 +8,8 @@ const CreateActivity = ({
   useModal,
   setUseModal,
   setActivitiesData,
-  setDbMessage
+  setDbMessage,
+  setCreateActivity,
 }) => {
   const [activityName, setActivityName] = useState("");
   const [activityDesc, setActivityDesc] = useState("");
@@ -21,6 +22,7 @@ const CreateActivity = ({
   const submitHandler = async (e) => {
     e.preventDefault();
     setUseModal(false);
+    setCreateActivity(false);
     const name = activityName;
     const description = activityDesc;
     const data = {
@@ -40,9 +42,10 @@ const CreateActivity = ({
   const clickHandler = (e) => {
     e.preventDefault();
     setUseModal(false);
+    setCreateActivity(false);
   };
   return (
-    <Modal setUseModal={setUseModal}>
+    <Modal setUseModal={setUseModal} setCreateActivity={setCreateActivity}>
       <header>
         <h3>Create New Activity</h3>
       </header>

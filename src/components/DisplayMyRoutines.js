@@ -10,7 +10,7 @@ const DisplayMyRoutines = ({
   useModal,
   setUseModal,
   activitiesData,
-  setSuccessMessage,
+  setDbMessage
 }) => {
   return (
     <div>
@@ -31,7 +31,7 @@ const DisplayMyRoutines = ({
                     <p>Count: {activity.count}</p>
                     <p>Duration: {activity.duration}</p>
                     <form>
-                      <button>Edit</button>
+                      <button>Edit Activity</button>
                       <DeleteActivityButton token={token} userData={userData} setMyRoutines={setMyRoutines} routineActivityId={activity.routineActivityId}/>
                     </form>
                   </div>
@@ -48,12 +48,12 @@ const DisplayMyRoutines = ({
               activitiesData={activitiesData}
               useModal={useModal}
               setUseModal={setUseModal}
-              setSuccessMessage={setSuccessMessage}
               userData={userData}
               setMyRoutines={setMyRoutines}
+              setDbMessage={setDbMessage}
             />
             <form>
-              <button>Edit</button>
+              <button>Edit Routine</button>
               <DeleteButton
                 token={token}
                 userData={userData}

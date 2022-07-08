@@ -21,9 +21,11 @@ const Activities = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [dbMessage, setDbMessage] = useState("");
+  const [createActivity, setCreateActivity] = useState(false);
   const clickHandler = (e) => {
     e.preventDefault();
     setUseModal(true);
+    setCreateActivity(true);
   };
   return (
     <main>
@@ -37,16 +39,17 @@ const Activities = ({
             </form>
           </div>
         )}
-        {token && useModal && (
+        {(token && createActivity && useModal) && (
           <CreateActivity
             token={token}
             useModal={useModal}
             setUseModal={setUseModal}
             setActivitiesData={setActivitiesData}
             setDbMessage={setDbMessage}
+            setCreateActivity={setCreateActivity}
           />
         )}
-        {dbMessage && useModal && (
+        {(dbMessage && useModal) && (
           <DatabaseMessage dbMessage={dbMessage} setDbMessage={setDbMessage} setUseModal={setUseModal} />
         )}
         {activitiesData.map((activity) => {

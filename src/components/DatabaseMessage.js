@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 
-const DatabaseMessage = ({dbMessage, setDbMessage, setUseModal}) => {
+const DatabaseMessage = ({dbMessage, setDbMessage, setUseModal, setCreateRoutine}) => {
   let navigate = useNavigate();
   const clickHandler = () => {
     setUseModal(false);
@@ -9,7 +9,7 @@ const DatabaseMessage = ({dbMessage, setDbMessage, setUseModal}) => {
     setDbMessage("");
   }
   return (
-    <Modal setUseModal={setUseModal} dbMessage={dbMessage} >
+    <Modal setUseModal={setUseModal} dbMessage={dbMessage} setCreateRoutine={setCreateRoutine} >
       <header>
         <h3>{dbMessage}</h3>
       </header>

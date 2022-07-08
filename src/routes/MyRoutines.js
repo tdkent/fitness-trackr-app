@@ -4,7 +4,6 @@ import CreateRoutine from "../components/CreateRoutine";
 import DatabaseMessage from "../components/DatabaseMessage";
 import { getMyPublicRoutines, getActivitiesRequest } from "../api";
 import DisplayMyRoutines from "../components/DisplayMyRoutines";
-import SuccessMessage from "../components/SuccessMessage";
 
 const MyRoutines = ({
   token,
@@ -32,7 +31,6 @@ const MyRoutines = ({
   const [myRoutines, setMyRoutines] = useState([]);
   const [dbMessage, setDbMessage] = useState("");
   const [createRoutine, setCreateRoutine] = useState(false);
-  const [successMessage, setSuccessMessage] = useState(false);
   const clickHandler = (e) => {
     e.preventDefault();
     setUseModal(true);
@@ -40,48 +38,48 @@ const MyRoutines = ({
   };
   return (
     <>
-    {(useModal && successMessage) && <SuccessMessage setUseModal={setUseModal}/>}
-    <main>
-      <h2>My Routines</h2>
-      <section>
-        <div>
-          <form>
-            <label>Create a new routine:</label>
-            <button onClick={clickHandler}>New Routine</button>
-          </form>
-        </div>
-        {createRoutine && useModal && (
-          <CreateRoutine
+      <main>
+        <h2>My Routines</h2>
+        <section>
+          <div>
+            <form>
+              <label>Create a new routine:</label>
+              <button onClick={clickHandler}>New Routine</button>
+            </form>
+          </div>
+          {createRoutine && useModal && (
+            <CreateRoutine
+              token={token}
+              userData={userData}
+              setUseModal={setUseModal}
+              setDbMessage={setDbMessage}
+              setMyRoutines={setMyRoutines}
+              setCreateRoutine={setCreateRoutine}
+            />
+          )}
+          {dbMessage && useModal && (
+            <DatabaseMessage
+              dbMessage={dbMessage}
+              setDbMessage={setDbMessage}
+              setUseModal={setUseModal}
+              setCreateRoutine={setCreateRoutine}
+            />
+          )}
+        </section>
+        <section>
+          <h3>{`${userData.username}'s Routines:`}</h3>
+          <DisplayMyRoutines
             token={token}
             userData={userData}
+            myRoutines={myRoutines}
+            useModal={useModal}
             setUseModal={setUseModal}
-            setDbMessage={setDbMessage}
             setMyRoutines={setMyRoutines}
-            setCreateRoutine={setCreateRoutine}
-          />
-        )}
-        {dbMessage && useModal && (
-          <DatabaseMessage
-            dbMessage={dbMessage}
+            activitiesData={activitiesData}
             setDbMessage={setDbMessage}
-            setUseModal={setUseModal}
           />
-        )}
-      </section>
-      <section>
-        <h3>{`${userData.username}'s Routines:`}</h3>
-        <DisplayMyRoutines
-          token={token}
-          userData={userData}
-          myRoutines={myRoutines}
-          useModal={useModal}
-          setUseModal={setUseModal}
-          setMyRoutines={setMyRoutines}
-          activitiesData={activitiesData}
-          setSuccessMessage={setSuccessMessage}
-        />
-      </section>
-    </main>
+        </section>
+      </main>
     </>
   );
 };
