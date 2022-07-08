@@ -36,6 +36,8 @@ function App() {
               userData={userData}
               useModal={useModal}
               setUseModal={setUseModal}
+              activitiesData={activitiesData}
+              setActivitiesData={setActivitiesData}
             />
           }
         />

@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { postCreateRoutineRequest } from "../api";
+import { postCreateRoutineRequest, getMyPublicRoutines } from "../api";
 import Modal from "./Modal";
 
-const CreateRoutine = ({ token, userData, setUseModal }) => {
+const CreateRoutine = ({ token, userData, setUseModal, setDbMessage, setMyRoutines, setCreateRoutine }) => {
   const [routineName, setRoutineName] = useState("");
   const [routineGoal, setRoutineGoal] = useState("");
   const [makePublic, setMakePublic] = useState(false);
@@ -18,6 +18,8 @@ const CreateRoutine = ({ token, userData, setUseModal }) => {
   }
   const submitHandler = async(e) => {
     e.preventDefault();
+    setUseModal(false);
+    setCreateRoutine(false);
     const name = routineName;
     const goal = routineGoal;
     const isPublic = makePublic;
@@ -29,14 +31,21 @@ const CreateRoutine = ({ token, userData, setUseModal }) => {
     }
     const result = await postCreateRoutineRequest(routineData);
     console.log("Result after attempting to create a new routine: ", result);
-    setUseModal(false);
+    if(result.error) {
+      setDbMessage(result.message);
+      setUseModal(true);
+    } else {
+      const data = await getMyPublicRoutines(userData.username);
+      setMyRoutines(data);
+    }
   }
   const clickHandler = (e) => {
     e.preventDefault();
     setUseModal(false);
+    setCreateRoutine(false);
   };
   return (
-    <Modal setUseModal={setUseModal}>
+    <Modal setUseModal={setUseModal} setCreateRoutine={setCreateRoutine}>
       <header>
         <h3>Create a Routine</h3>
       </header>

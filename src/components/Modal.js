@@ -5,6 +5,7 @@ const Modal = (props) => {
   let navigate = useNavigate();
   const clickHandler = () => {
     props.setUseModal(false);
+    props.setCreateRoutine(false);
     props.dbMessage === "you're logged in!" && navigate("/");
   }
   return (

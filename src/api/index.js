@@ -56,17 +56,83 @@ const postCreateRoutineRequest = async ({ token, name, goal, isPublic }) => {
   }
 };
 
-const getMyPublicRoutines = async(username) => {
+const getMyPublicRoutines = async (username) => {
   try {
     const response = await fetch(`${DATABASE}/users/${username}/routines`);
     const data = await response.json();
     return data;
-  }
-  catch(error) {
+  } catch (error) {
     console.error(error);
     throw error;
   }
-}
+};
+
+const postAddActivityToRoutine = async (
+  routineId,
+  activityId,
+  count,
+  duration
+) => {
+  try {
+    const response = await fetch(
+      `${DATABASE}/routines/${routineId}/activities`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          routineId,
+          activityId,
+          count,
+          duration,
+        }),
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const deleteActivityFromRoutine = async (token, routineActivityId) => {
+  try {
+    const response = await fetch(
+      `${DATABASE}/routine_activities/${routineActivityId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const deleteMyRoutine = async (token, routineId) => {
+  try {
+    const response = await fetch(`${DATABASE}/routines/${routineId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 
 // Activities
 const getActivitiesRequest = async () => {
@@ -108,4 +174,7 @@ export {
   postCreateRoutineRequest,
   postCreateActivityRequest,
   getMyPublicRoutines,
+  deleteMyRoutine,
+  postAddActivityToRoutine,
+  deleteActivityFromRoutine
 };
