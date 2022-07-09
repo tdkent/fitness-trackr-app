@@ -7,6 +7,7 @@ const Modal = (props) => {
     props.setUseModal(false);
     props.setCreateRoutine(false);
     props.setCreateActivity(false);
+    props.setEditRoutine(false);
     props.dbMessage === "you're logged in!" && navigate("/");
   }
   return (

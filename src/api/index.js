@@ -117,6 +117,56 @@ const deleteActivityFromRoutine = async (token, routineActivityId) => {
   }
 };
 
+const patchMyRoutine = async (token, routineId, name, goal) => {
+  try {
+    const response = await fetch(`${DATABASE}/routines/${routineId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name,
+        goal,
+      }),
+    });
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const patchMyRoutineActivity = async (
+  token,
+  routineActivityId,
+  count,
+  duration
+) => {
+  try {
+    const response = await fetch(
+      `${DATABASE}/routine_activities/${routineActivityId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          count,
+          duration,
+        }),
+      }
+    );
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 const deleteMyRoutine = async (token, routineId) => {
   try {
     const response = await fetch(`${DATABASE}/routines/${routineId}`, {
@@ -176,5 +226,7 @@ export {
   getMyPublicRoutines,
   deleteMyRoutine,
   postAddActivityToRoutine,
-  deleteActivityFromRoutine
+  deleteActivityFromRoutine,
+  patchMyRoutine,
+  patchMyRoutineActivity,
 };

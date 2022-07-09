@@ -1,6 +1,8 @@
 import AddActivity from "./AddActivity";
 import DeleteButton from "./DeleteButton";
 import DeleteActivityButton from "./DeleteActivityButton";
+import EditRoutineButton from "./EditRoutineButton";
+import EditRoutineActivityButton from "./EditRoutineActivityButton";
 
 const DisplayMyRoutines = ({
   token,
@@ -10,7 +12,11 @@ const DisplayMyRoutines = ({
   useModal,
   setUseModal,
   activitiesData,
-  setDbMessage
+  setDbMessage,
+  setEditRoutine,
+  setEditRoutineActivity,
+  setCurrentRoutineData,
+  setCurrentRoutineActivityData,
 }) => {
   return (
     <div>
@@ -31,8 +37,19 @@ const DisplayMyRoutines = ({
                     <p>Count: {activity.count}</p>
                     <p>Duration: {activity.duration}</p>
                     <form>
-                      <button>Edit Activity</button>
-                      <DeleteActivityButton token={token} userData={userData} setMyRoutines={setMyRoutines} routineActivityId={activity.routineActivityId}/>
+                      <EditRoutineActivityButton
+                        setCurrentRoutineActivityData={
+                          setCurrentRoutineActivityData
+                        }
+                        activityData={activity}
+                        setEditRoutineActivity={setEditRoutineActivity}
+                      />
+                      <DeleteActivityButton
+                        token={token}
+                        userData={userData}
+                        setMyRoutines={setMyRoutines}
+                        routineActivityId={activity.routineActivityId}
+                      />
                     </form>
                   </div>
                 );
@@ -53,7 +70,11 @@ const DisplayMyRoutines = ({
               setDbMessage={setDbMessage}
             />
             <form>
-              <button>Edit Routine</button>
+              <EditRoutineButton
+                setEditRoutine={setEditRoutine}
+                setCurrentRoutineData={setCurrentRoutineData}
+                routineData={routine}
+              />
               <DeleteButton
                 token={token}
                 userData={userData}

@@ -10,6 +10,7 @@ import Nav from "./components/Nav";
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [username, setUsername] = useState(window.localStorage.getItem("username"));
   const [userData, setUserData] = useState({});
   const [routinesData, setRoutinesData] = useState([]);
   const [activitiesData, setActivitiesData] = useState([]);
@@ -38,6 +39,7 @@ function App() {
               setUseModal={setUseModal}
               activitiesData={activitiesData}
               setActivitiesData={setActivitiesData}
+              username={username}
             />
           }
         />
@@ -58,6 +60,7 @@ function App() {
           element={
             <Auth
               setToken={setToken}
+              setUsersName={setUsername}
               setUserData={setUserData}
               useModal={useModal}
               setUseModal={setUseModal}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { DATABASE, userRegisterLoginRequest } from "../api";
 import DatabaseMessage from "../components/DatabaseMessage";
 
-const Auth = ({ setToken, setUserData, useModal, setUseModal }) => {
+const Auth = ({ setToken, setUserData, useModal, setUseModal, setUsersName }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -40,7 +40,9 @@ const Auth = ({ setToken, setUserData, useModal, setUseModal }) => {
     if (token) {
       setToken(token);
       setUserData(user);
+      setUsersName(user.username);
       window.localStorage.setItem("token", token);
+      window.localStorage.setItem("username", user.username);
     }
     setPassword("");
   };
