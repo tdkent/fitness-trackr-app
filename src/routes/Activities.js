@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { getActivitiesRequest } from "../api";
 import CreateActivity from "../components/CreateActivity";
 import DatabaseMessage from "../components/DatabaseMessage";
-
+import "./Activities.css";
 const Activities = ({
   token,
   useModal,
@@ -32,10 +32,10 @@ const Activities = ({
       <h2>Activities</h2>
       <section>
         {token && (
-          <div>
+          <div id="create-activity">
             <form>
               <label>Create a new activity:</label>
-              <button onClick={clickHandler}>New Activity</button>
+              <button onClick={clickHandler} className="primary">New Activity</button>
             </form>
           </div>
         )}
@@ -54,7 +54,7 @@ const Activities = ({
         )}
         {activitiesData.map((activity) => {
           return (
-            <div key={activity.id}>
+            <div key={activity.id} className="activity-container">
               <h3>{activity.name}</h3>
               <p>{activity.description}</p>
             </div>

@@ -8,7 +8,7 @@ const DeleteButton = ({ token, userData, routineId, setMyRoutines }) => {
     setMyRoutines(data);
   }
   return (
-    <button onClick={clickHandler}>Delete Routine</button>
+    <button onClick={clickHandler} className="warning">Delete Routine</button>
   )
 }
 

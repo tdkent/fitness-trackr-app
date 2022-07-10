@@ -42,16 +42,16 @@ const EditRoutine = ({ setEditRoutine, routineData, token, setMyRoutines }) => {
         <input
           id="name"
           type="text"
-          placeholder="Edit name of routine"
           onChange={nameChangeHandler}
+          className="text-input"
           required
         />
         <label htmlFor="goal">Goal:</label>
         <input
           id="goal"
           type="text"
-          placeholder="Edit goal of routine"
           onChange={goalChangeHandler}
+          className="text-input"
           required
         />
         <button type="submit">Submit</button>

@@ -9,7 +9,7 @@ const DeleteActivityButton = ({ token, userData, routineActivityId, setMyRoutine
     setMyRoutines(data);
   }
   return (
-    <button onClick={clickHandler}>Delete Activity</button>
+    <button onClick={clickHandler} className="warning">Remove Activity</button>
   )
 }
 

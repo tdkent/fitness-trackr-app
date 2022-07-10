@@ -21,6 +21,23 @@ const userRegisterLoginRequest = async (url, username, password) => {
   }
 };
 
+const getMe = async(token) => {
+  try {
+    const response = await fetch(`${DATABASE}/users/me`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    })
+    const data = await response.json();
+    return data;
+  }
+  catch (error) {
+    console.error(error);
+    throw error
+  }
+}
+
 // Routines
 const getPublicRoutinesRequest = async () => {
   try {
@@ -229,4 +246,5 @@ export {
   deleteActivityFromRoutine,
   patchMyRoutine,
   patchMyRoutineActivity,
+  getMe
 };

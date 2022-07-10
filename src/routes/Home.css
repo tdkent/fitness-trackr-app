@@ -1,0 +1,8 @@
+#features-list {
+  margin:1rem 0;
+}
+
+#features-list li {
+  list-style-type: none;
+  margin:.5rem 0;
+}

@@ -50,24 +50,28 @@ const CreateActivity = ({
         <h3>Create New Activity</h3>
       </header>
       <form onSubmit={submitHandler}>
+        <div>
         <label>Name:</label>
         <input
           id="name"
           type="text"
-          placeholder="Enter name of activity"
           onChange={nameChangeHandler}
+          className="text-input"
           required
         />
+        </div>
+        <div>
         <label>Description:</label>
         <input
           id="description"
           type="text"
-          placeholder="Enter description of activity"
           onChange={descChangeHandler}
+          className="text-input"
           required
         />
-        <button type="submit">Submit</button>
-        <button onClick={clickHandler}>Cancel</button>
+        </div>
+        <button type="submit" className="primary">Submit</button>
+        <button onClick={clickHandler} className="neutral">Cancel</button>
       </form>
     </Modal>
   );

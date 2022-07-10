@@ -22,17 +22,17 @@ const DisplayMyRoutines = ({
     <div>
       {myRoutines.map((routine) => {
         return (
-          <div key={routine.id}>
-            <h4>{routine.name}</h4>
-            <p>{routine.goal}</p>
+          <div key={routine.id} className="routine-container">
+            <h3>{routine.name}</h3>
+            <p>Goal: {routine.goal}</p>
             <div>
               <header>
-                <h6>Activities</h6>
+                <h4>Related Activities:</h4>
               </header>
               {routine.activities.map((activity) => {
                 return (
-                  <div key={activity.id}>
-                    <p>Name: {activity.name}</p>
+                  <div key={activity.id} className="related-activity-container">
+                    <h5>{activity.name}</h5>
                     <p>Description: {activity.description}</p>
                     <p>Count: {activity.count}</p>
                     <p>Duration: {activity.duration}</p>
@@ -56,9 +56,9 @@ const DisplayMyRoutines = ({
               })}
             </div>
             {routine.isPublic ? (
-              <p>You have set this Routine to Public.</p>
+              <p>Routine Status: Public</p>
             ) : (
-              <p>You have set this Routine to Private.</p>
+              <p>Routine Status: Private</p>
             )}
             <AddActivity
               routineId={routine.id}

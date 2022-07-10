@@ -1,0 +1,26 @@
+#create-activity {
+  margin:2rem auto;
+}
+
+#create-activity label {
+  font-size:1.2rem;
+  margin:.5rem;
+}
+
+.activity-container {
+  border-radius:8px;
+  border:1px solid white;
+  width:60%;
+  margin:1.5rem auto;
+  padding:.8rem;
+}
+
+.activity-container h3 {
+  font-size:1.8rem;
+}
+
+@media screen and (max-width:1200px) {
+  .activity-container {
+    width: 100%;
+  }
+}

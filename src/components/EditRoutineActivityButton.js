@@ -5,7 +5,7 @@ const EditRoutineActivityButton = ({setEditRoutineActivity, setCurrentRoutineAct
     setCurrentRoutineActivityData(activityData);
   }
   return (
-    <button onClick={clickHandler}>Edit Activity</button>
+    <button onClick={clickHandler} className="neutral">Edit Activity</button>
   )
 }
 

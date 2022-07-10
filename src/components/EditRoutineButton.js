@@ -5,7 +5,7 @@ const EditRoutineButton = ({ setEditRoutine, routineData, setCurrentRoutineData 
     setCurrentRoutineData(routineData);
   }
   return (
-    <button onClick={clickHandler}>Edit Routine</button>
+    <button onClick={clickHandler} className="neutral">Edit Routine</button>
   )
 }
 

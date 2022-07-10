@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { postAddActivityToRoutine, getMyPublicRoutines } from "../api";
-
+import "./AddActivity.css";
 const AddActivity = ({
   routineId,
   activitiesData,
@@ -9,7 +9,7 @@ const AddActivity = ({
   setUseModal,
   userData,
   setMyRoutines,
-  setDbMessage
+  setDbMessage,
 }) => {
   const [activityId, setActivityId] = useState("");
   const [activityCount, setActivityCount] = useState("");
@@ -46,7 +46,7 @@ const AddActivity = ({
       setDbMessage(result.message);
       setUseModal(true);
     } else {
-      alert("An unknown error occured. Please try again later.")
+      alert("An unknown error occured. Please try again later.");
     }
     setActivityCount("");
     setActivityDuration("");
@@ -54,11 +54,18 @@ const AddActivity = ({
     setActivityName("");
   };
   return (
-    <div>
-      <header>Add Activity</header>
+    <div className="add-activity">
+      <header>
+        <h5>Add Activity</h5>
+      </header>
       <form onSubmit={submitHandler}>
-        <label htmlFor="add-activity">Name:</label>
-        <select id="add-activity" onChange={selectionHandler} value={activityName} required>
+        <label htmlFor="activity-select">Name:</label>
+        <select
+          id="activity-select"
+          onChange={selectionHandler}
+          value={activityName}
+          required
+        >
           <option placeholder="Select activity:"></option>
           {activitiesData.map((activity) => {
             return (
@@ -68,25 +75,27 @@ const AddActivity = ({
             );
           })}
         </select>
-        <label>Count:</label>
-        <input
-          type="number"
-          min="1"
-          max="100"
-          onChange={countChangeHandler}
-          value={activityCount}
-          required
-        />
-        <label>Duration:</label>
-        <input
-          type="number"
-          min="1"
-          max="100"
-          onChange={durationChangeHandler}
-          value={activityDuration}
-          required
-        />
-        <button type="submit">Submit</button>
+        <div>
+          <label>Count:</label>
+          <input
+            type="number"
+            min="1"
+            max="100"
+            onChange={countChangeHandler}
+            value={activityCount}
+            required
+          />
+          <label>Duration:</label>
+          <input
+            type="number"
+            min="1"
+            max="100"
+            onChange={durationChangeHandler}
+            value={activityDuration}
+            required
+          />
+        </div>
+        <button type="submit" className="primary">Submit</button>
       </form>
     </div>
   );

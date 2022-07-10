@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import CreateRoutine from "../components/CreateRoutine";
 import DatabaseMessage from "../components/DatabaseMessage";
-import { getMyPublicRoutines, getActivitiesRequest } from "../api";
+import { getMyPublicRoutines, getActivitiesRequest, getMe } from "../api";
 import DisplayMyRoutines from "../components/DisplayMyRoutines";
 import EditRoutine from "../components/EditRoutine";
 import EditRoutineActivity from "../components/EditRoutineActivity";
@@ -10,15 +10,19 @@ import EditRoutineActivity from "../components/EditRoutineActivity";
 const MyRoutines = ({
   token,
   userData,
+  setUserData,
   useModal,
   setUseModal,
   activitiesData,
   setActivitiesData,
-  username
+  username,
 }) => {
   useEffect(() => {
+    const getUserData = async () => {
+      const user = await getMe(token);
+      setUserData(user);
+    };
     const getMyRoutinesHandler = async () => {
-      console.log("username: ", username);
       const data = await getMyPublicRoutines(username);
       console.log("Result of user's routines get request (MyRoutines): ", data);
       setMyRoutines(data);
@@ -28,6 +32,7 @@ const MyRoutines = ({
       console.log("Result of activities data request (MyRoutines): ", data);
       setActivitiesData(data);
     };
+    getUserData();
     getMyRoutinesHandler();
     fetchActivitiesHandler();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,7 +43,9 @@ const MyRoutines = ({
   const [editRoutine, setEditRoutine] = useState(false);
   const [editRoutineActivity, setEditRoutineActivity] = useState(false);
   const [currentRoutineData, setCurrentRoutineData] = useState([]);
-  const [currentRoutineActivityData, setCurrentRoutineActivityData] = useState([]);
+  const [currentRoutineActivityData, setCurrentRoutineActivityData] = useState(
+    []
+  );
   const clickHandler = (e) => {
     e.preventDefault();
     setUseModal(true);
@@ -52,7 +59,9 @@ const MyRoutines = ({
           <div>
             <form>
               <label>Create a new routine:</label>
-              <button onClick={clickHandler}>New Routine</button>
+              <button onClick={clickHandler} className="primary">
+                New Routine
+              </button>
             </form>
           </div>
           {createRoutine && useModal && (
@@ -73,8 +82,23 @@ const MyRoutines = ({
               setCreateRoutine={setCreateRoutine}
             />
           )}
-          {editRoutine && <EditRoutine setEditRoutine={setEditRoutine} routineData={currentRoutineData} token={token} setMyRoutines={setMyRoutines} />}
-          {editRoutineActivity && <EditRoutineActivity setEditRoutineActivity={setEditRoutineActivity} routineActivityData={currentRoutineActivityData} token={token} setMyRoutines={setMyRoutines} userData={userData} />}
+          {editRoutine && (
+            <EditRoutine
+              setEditRoutine={setEditRoutine}
+              routineData={currentRoutineData}
+              token={token}
+              setMyRoutines={setMyRoutines}
+            />
+          )}
+          {editRoutineActivity && (
+            <EditRoutineActivity
+              setEditRoutineActivity={setEditRoutineActivity}
+              routineActivityData={currentRoutineActivityData}
+              token={token}
+              setMyRoutines={setMyRoutines}
+              userData={userData}
+            />
+          )}
         </section>
         <section>
           <h3>{`${userData.username}'s Routines:`}</h3>

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { getPublicRoutinesRequest } from "../api";
+import "./Routines.css";
 const Routines = ({ setRoutinesData, routinesData }) => {
   useEffect(() => {
     const getRoutinesHandler = async () => {
@@ -16,22 +17,22 @@ const Routines = ({ setRoutinesData, routinesData }) => {
   return (
     <main>
       <h2>Routines</h2>
-      <p>List of all publicly available routines.</p>
+      <p>These are the current publicly-available routines.</p>
       <section>
         {routinesData.map((routine) => {
           return (
-            <div key={routine.id}>
+            <div key={routine.id} className="routine-container">
               <header>
                 <h3>{routine.name}</h3>
-                <p>{routine.goal}</p>
+                <p>Goal: {routine.goal}</p>
               </header>
               <div>
-                <p>Activities:</p>
+                <h4>Related Activities:</h4>
                 {routine.activities.length ? (
                   routine.activities.map((activity) => {
                     return (
-                      <div key={activity.id}>
-                        <h4>{activity.name}</h4>
+                      <div key={activity.id} className="related-activity-container">
+                        <h5>{activity.name}</h5>
                         <p>Count: {activity.count}</p>
                         <p>Duration: {activity.duration}</p>
                       </div>

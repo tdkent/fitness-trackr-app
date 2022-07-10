@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { DATABASE, userRegisterLoginRequest } from "../api";
 import DatabaseMessage from "../components/DatabaseMessage";
+import "./Auth.css";
 
 const Auth = ({ setToken, setUserData, useModal, setUseModal, setUsersName }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -50,7 +51,8 @@ const Auth = ({ setToken, setUserData, useModal, setUseModal, setUsersName }) =>
     <main>
       {useModal && <DatabaseMessage dbMessage={dbMessage} setDbMessage={setDbMessage} setUseModal={setUseModal} />}
       <h2>{isLogin ? "Log In" : "Create Account"}</h2>
-      <form onSubmit={formSubmitHandler}>
+      <form onSubmit={formSubmitHandler} id="auth-form">
+        <div>
         <label htmlFor="username">Username:</label>
         <input
           id="username"
@@ -59,6 +61,8 @@ const Auth = ({ setToken, setUserData, useModal, setUseModal, setUsersName }) =>
           placeholder="Enter your username"
           required
         />
+        </div>
+        <div>
         <label htmlFor="password">Password:</label>
         <input
           id="password"
@@ -68,22 +72,19 @@ const Auth = ({ setToken, setUserData, useModal, setUseModal, setUsersName }) =>
           value={password}
           required
         />
+        </div>
         {isLogin ? (
           <>
-            <button>Log In</button>
-            <Link to="#">
-              <p onClick={changeStatusHandler}>
-                Dont' have an account? Click here to create one.
-              </p>
+            <button className="primary">Log In</button>
+            <Link to="#" className="link" onClick={changeStatusHandler}>
+            <p>Don't have an account? Click here to create one.</p>
             </Link>
           </>
         ) : (
           <>
-            <button>Register</button>
-            <Link to="#">
-              <p onClick={changeStatusHandler}>
-                Have an account? Click here to log in.
-              </p>
+            <button className="primary">Register</button>
+            <Link to="#" className="link" onClick={changeStatusHandler}>
+              <p>Have an account? Click here to log in.</p>
             </Link>
           </>
         )}

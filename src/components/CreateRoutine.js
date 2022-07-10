@@ -50,26 +50,32 @@ const CreateRoutine = ({ token, userData, setUseModal, setDbMessage, setMyRoutin
         <h3>Create a Routine</h3>
       </header>
       <form onSubmit={submitHandler}>
+        <div>
         <label htmlFor="name">Name:</label>
         <input
           id="name"
           type="text"
-          placeholder="Enter name of routine"
           onChange={nameChangeHandler}
+          className="text-input"
           required
         />
+        </div>
+        <div>
         <label htmlFor="goal">Goal:</label>
         <input
           id="goal"
           type="text"
-          placeholder="Enter goal of routine"
           onChange={goalChangeHandler}
+          className="text-input"
           required
         />
+        </div>
+        <div>
         <label htmlFor="public">Make routine public?</label>
         <input id="public" type="checkbox" onChange={publicChangeHandler} />
-        <button type="submit">Submit</button>
-        <button onClick={clickHandler}>Cancel</button>
+        </div>
+        <button type="submit" className="primary">Submit</button>
+        <button onClick={clickHandler} className="neutral">Cancel</button>
       </form>
     </Modal>
   );

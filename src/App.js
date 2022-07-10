@@ -7,6 +7,7 @@ import Activities from "./routes/Activities";
 import Auth from "./routes/Auth";
 import Unknown from "./routes/Unknown";
 import Nav from "./components/Nav";
+import "./App.css";
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -17,6 +18,8 @@ function App() {
   const [useModal, setUseModal] = useState(false);
 
   return (
+    <>
+    <div id="container">
     <Routes>
       <Route path="/" element={<Nav token={token} setToken={setToken} />}>
         <Route path="/" element={<Home />} />
@@ -35,6 +38,7 @@ function App() {
             <MyRoutines
               token={token}
               userData={userData}
+              setUserData={setUserData}
               useModal={useModal}
               setUseModal={setUseModal}
               activitiesData={activitiesData}
@@ -70,6 +74,9 @@ function App() {
         <Route path="*" element={<Unknown />} />
       </Route>
     </Routes>
+    </div>
+    <footer>Copyright &copy; 2022 Tim Kent</footer>
+    </>
   );
 }
 

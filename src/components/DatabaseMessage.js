@@ -11,10 +11,11 @@ const DatabaseMessage = ({dbMessage, setDbMessage, setUseModal, setCreateRoutine
   return (
     <Modal setUseModal={setUseModal} dbMessage={dbMessage} setCreateRoutine={setCreateRoutine} >
       <header>
-        <h3>{dbMessage}</h3>
+      {!dbMessage === "you're logged in!" && <h3>There was an error!</h3>}
+        <p>{dbMessage}</p>
       </header>
       <div>
-        <button onClick={clickHandler}>Okay</button>
+        <button onClick={clickHandler} className="primary">Okay</button>
       </div>
     </Modal>
   )

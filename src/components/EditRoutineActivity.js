@@ -40,26 +40,30 @@ const EditRoutineActivity = ({
   };
   return (
     <EditRoutineActivityModal setEditRoutineActivity={setEditRoutineActivity}>
-      <header>Add Activity</header>
+      <header>
+        <h3>Edit Activity</h3>
+      </header>
       <form onSubmit={submitHandler}>
-        <label>Count:</label>
-        <input
-          type="number"
-          min="1"
-          max="100"
-          onChange={countChangeHandler}
-          required
-        />
-        <label>Duration:</label>
-        <input
-          type="number"
-          min="1"
-          max="100"
-          onChange={durationChangeHandler}
-          required
-        />
-        <button type="submit">Submit</button>
-        <button onClick={clickHandler}>Cancel</button>
+        <div>
+          <label>Count:</label>
+          <input
+            type="number"
+            min="1"
+            max="100"
+            onChange={countChangeHandler}
+            required
+          />
+          <label>Duration:</label>
+          <input
+            type="number"
+            min="1"
+            max="100"
+            onChange={durationChangeHandler}
+            required
+          />
+        </div>
+        <button type="submit" className="primary">Submit</button>
+        <button onClick={clickHandler} className="neutral">Cancel</button>
       </form>
     </EditRoutineActivityModal>
   );

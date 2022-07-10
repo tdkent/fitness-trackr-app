@@ -16,7 +16,12 @@
   border-radius: 8px;
   z-index: 100;
   box-shadow: 0 3px 10px rgb(0, 0, 0, 0.4);
-  background-color: white;
+  background-color: #1e2457;
+  padding:1rem;
+}
+
+.modal p {
+  font-size:1.5rem;
 }
 
 @media screen and (max-width:1200px) {
