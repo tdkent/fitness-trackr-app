@@ -16,7 +16,13 @@
   border-radius: 8px;
   z-index: 100;
   box-shadow: 0 3px 10px rgb(0, 0, 0, 0.4);
-  background-color: #1e2457;
+
+  /* MODAL BACKGROUND COLOR CONTROL */
+
+  background-color: lavender;
+
+  /* ==============================*/
+
   padding:1rem;
 }
 

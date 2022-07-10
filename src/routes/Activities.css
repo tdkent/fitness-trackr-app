@@ -9,10 +9,12 @@
 
 .activity-container {
   border-radius:8px;
-  border:1px solid white;
+  background-color: rgb(90, 132, 194);
   width:60%;
   margin:1.5rem auto;
   padding:.8rem;
+  color:rgb(245, 245, 245);
+  box-shadow: 2px 2px 4px rgb(30, 30, 30, .8);
 }
 
 .activity-container h3 {
